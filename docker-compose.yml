@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: viware-base-php
+    ports:
+      - target: 8080
+        published: 80
+        protocol: tcp
+        mode: host
+    network_mode: host
+    volumes:
+      - './src:/var/www/html'
