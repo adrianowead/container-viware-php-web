@@ -9,10 +9,10 @@
 <body>
     <ul>
         <li>
-            <a href="index7.4.php">PHP 7.4</a>
+            <a href="index.7.php">PHP 7.4</a>
         </li>
         <li>
-            <a href="index8.0.php">PHP 8.0</a>
+            <a href="index.8.php">PHP 8.0</a>
         </li>
     </ul>
 </body>
