@@ -47,14 +47,6 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     apt-transport-https
 
-# instalando nvm para suporte a multiplas versões
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-
-RUN echo 'export NVM_DIR="/root/.nvm"' >> "/root/.bashrc"
-RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> "/root/.bashrc"
-RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> "/root/.bashrc"
-RUN /bin/bash -c "source /root/.bashrc"
-
 RUN apt-get install -y mysql-client \
     && apt-get install -y postgresql-client
 
