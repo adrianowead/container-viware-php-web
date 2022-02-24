@@ -218,9 +218,15 @@ RUN a2enmod rewrite \
     && a2enmod proxy_html \
     && a2enmod setenvif
 
-COPY start-container /usr/local/bin/start-container-viware
-COPY config/supervisord.conf /etc/supervisor/conf.d/viware.conf
-RUN chmod +x /usr/local/bin/start-container-viware
+COPY config/supervisord.conf /etc/supervisor/supervisord.conf
+COPY config/supervisor-viware.conf /etc/supervisor/conf.d/viware.conf
+
+# apache
+COPY config/default-vhost.conf /etc/apache2/sites-enabled/000-default.conf
+
+# PHP FPM
+COPY config/pool_7.conf /etc/php/7.4/fpm/pool.d/pool_7.conf
+COPY config/pool_8.conf /etc/php/8.0/fpm/pool.d/pool_8.conf
 
 RUN mkdir -p /run/php
 
@@ -229,7 +235,8 @@ RUN apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-EXPOSE 80
-EXPOSE 443
+RUN echo "127.0.0.1 viware-base-php" >> /etc/hosts
 
-ENTRYPOINT ["start-container-viware"]
+EXPOSE 80
+
+ENTRYPOINT ["supervisord"]
