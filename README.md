@@ -95,9 +95,8 @@ Repositório para gerenciamento de imagem Linux com todo o setup base, necessár
         - zstd
 
 
-* NodeJS 16.x
-    - NPM
-    - Yarn
+* NVM (Node Version Manager)
+    - Instale a versão que precisar em seu dockerfile, segundo a documentação: https://github.com/nvm-sh/nvm
 * Supervisor
 * Apache 2.4
     - Loaded Modules:
