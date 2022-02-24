@@ -206,6 +206,7 @@ RUN ssh-keyscan -H ssh.dev.azure.com > /root/.ssh/known_hosts
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN a2enmod rewrite \
+    && a2enmod rewrite \
     && a2enmod proxy \
     && a2enmod proxy_http \
     && a2enmod proxy_ajp \
