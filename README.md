@@ -4,7 +4,7 @@ Repositório para gerenciamento de imagem Linux com todo o setup base, necessár
 
 ## Recursos
 
-* PHP 7.4/8.0
+* PHP 7.3/7.4/8.0
     - CLI
     - FPM
     - extensions
