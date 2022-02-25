@@ -65,6 +65,54 @@ RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 
 RUN apt-get install -y \
+    php7.3-pgsql \
+    php7.3-imap \
+    php7.3-bcmath \
+    php7.3-pcov \
+    php7.3-ldap \
+    php7.3-xdebug \
+    php7.3-curl \
+    php7.3-dev \
+    php7.3-decimal \
+    php7.3-fpm \
+    php7.3-gd \
+    php7.3-gmp \
+    php7.3-grpc \
+    php7.3-http \
+    php7.3-igbinary \
+    php7.3-imagick \
+    php7.3-inotify \
+    php7.3-intl \
+    php7.3-mbstring \
+    php7.3-mcrypt \
+    php7.3-memcache \
+    php7.3-memcached \
+    php7.3-msgpack \
+    php7.3-mysql \
+    php7.3-mysqlnd \
+    php7.3-mongodb \
+    php7.3-oauth \
+    php7.3-odbc \
+    php7.3-opcache \
+    php7.3-pcov \
+    php7.3-protobuf \
+    php7.3-psr \
+    php7.3-raphf \
+    php7.3-readline \
+    php7.3-redis \
+    php7.3-soap \
+    php7.3-sqlite3 \
+    php7.3-swoole \
+    php7.3-uuid \
+    php7.3-xml \
+    php7.3-xmlrpc \
+    php7.3-xsl \
+    php7.3-yaml \
+    php7.3-zip \
+    php7.3-zmq \
+    php7.3-zstd
+
+RUN apt-get install -y \
     php7.4-pgsql \
     php7.4-imap \
     php7.4-bcmath \
@@ -163,13 +211,20 @@ RUN apt-get install -y \
 # adicionando extensões à partir do PECL
 RUN pecl update-channels
 
+# PHP 7.3
+RUN pecl -d php_suffix=7.3 install -f sqlsrv pdo_sqlsrv && \
+  pecl uninstall -r sqlsrv pdo_sqlsrv
+
+RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.3/mods-available/sqlsrv.ini && \
+  printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/7.3/mods-available/pdo_sqlsrv.ini
+
+
 # PHP 7.4
 RUN pecl -d php_suffix=7.4 install -f sqlsrv pdo_sqlsrv && \
   pecl uninstall -r sqlsrv pdo_sqlsrv
 
 RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.4/mods-available/sqlsrv.ini && \
   printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/7.4/mods-available/pdo_sqlsrv.ini
-
 
 # PHP 8.0
 RUN pecl -d php_suffix=8.0 install -f sqlsrv pdo_sqlsrv && \
@@ -184,6 +239,7 @@ RUN phpenmod -v ALL -s ALL sqlsrv pdo_sqlsrv
 
 RUN echo 'alias php8=/usr/bin/php8.0' >> ~/.bashrc
 RUN echo 'alias php7=/usr/bin/php7.4' >> ~/.bashrc
+RUN echo 'alias php7=/usr/bin/php7.3' >> ~/.bashrc
 
 RUN update-alternatives --set php /usr/bin/php8.0
 
@@ -218,8 +274,9 @@ COPY config/supervisor-viware.conf /etc/supervisor/conf.d/viware.conf
 COPY config/default-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 
 # PHP FPM
-COPY config/pool_7.conf /etc/php/7.4/fpm/pool.d/pool_7.conf
-COPY config/pool_8.conf /etc/php/8.0/fpm/pool.d/pool_8.conf
+COPY config/pool_73.conf /etc/php/7.3/fpm/pool.d/pool_73.conf
+COPY config/pool_74.conf /etc/php/7.4/fpm/pool.d/pool_74.conf
+COPY config/pool_80.conf /etc/php/8.0/fpm/pool.d/pool_80.conf
 
 RUN mkdir -p /run/php
 
