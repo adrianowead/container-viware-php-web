@@ -142,3 +142,17 @@ Repositório para gerenciamento de imagem Linux com todo o setup base, necessár
 
 * MySQL Client
 * PostgreSQL Client
+
+## Portas abertas:
+
+* Apache
+    - 80
+
+* PHP 7.3-FPM
+    - 7003
+
+* PHP 7.4-FPM
+    - 7004
+
+* PHP 8.0-FPM
+    - 8008
