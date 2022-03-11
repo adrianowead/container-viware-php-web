@@ -208,6 +208,54 @@ RUN apt-get install -y \
     php8.0-zmq \
     php8.0-zstd
 
+RUN apt-get install -y \
+    php8.1-pgsql \
+    php8.1-imap \
+    php8.1-bcmath \
+    php8.1-pcov \
+    php8.1-ldap \
+    php8.1-xdebug \
+    php8.1-curl \
+    php8.1-dev \
+    php8.1-decimal \
+    php8.1-fpm \
+    php8.1-gd \
+    php8.1-gmp \
+    php8.1-grpc \
+    php8.1-http \
+    php8.1-igbinary \
+    php8.1-imagick \
+    php8.1-inotify \
+    php8.1-intl \
+    php8.1-mbstring \
+    php8.1-mcrypt \
+    php8.1-memcache \
+    php8.1-memcached \
+    php8.1-msgpack \
+    php8.1-mysql \
+    php8.1-mysqlnd \
+    php8.1-mongodb \
+    php8.1-oauth \
+    php8.1-odbc \
+    php8.1-opcache \
+    php8.1-pcov \
+    php8.1-protobuf \
+    php8.1-psr \
+    php8.1-raphf \
+    php8.1-readline \
+    php8.1-redis \
+    php8.1-soap \
+    php8.1-sqlite3 \
+    php8.1-swoole \
+    php8.1-uuid \
+    php8.1-xml \
+    php8.1-xmlrpc \
+    php8.1-xsl \
+    php8.1-yaml \
+    php8.1-zip \
+    php8.1-zmq \
+    php8.1-zstd
+
 # adicionando extensões à partir do PECL
 RUN pecl update-channels
 
@@ -217,7 +265,6 @@ RUN pecl -d php_suffix=7.3 install -f sqlsrv pdo_sqlsrv && \
 
 RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.3/mods-available/sqlsrv.ini && \
   printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/7.3/mods-available/pdo_sqlsrv.ini
-
 
 # PHP 7.4
 RUN pecl -d php_suffix=7.4 install -f sqlsrv pdo_sqlsrv && \
@@ -230,13 +277,17 @@ RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.4/mods-available/
 RUN pecl -d php_suffix=8.0 install -f sqlsrv pdo_sqlsrv && \
   pecl uninstall -r sqlsrv pdo_sqlsrv
 
+# PHP 8.1
+RUN pecl -d php_suffix=8.1 install -f sqlsrv pdo_sqlsrv && \
+  pecl uninstall -r sqlsrv pdo_sqlsrv
+
 RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/8.0/mods-available/sqlsrv.ini && \
   printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/8.0/mods-available/pdo_sqlsrv.ini
 
 # PHP ALL
 RUN phpenmod -v ALL -s ALL sqlsrv pdo_sqlsrv
 
-
+RUN echo 'alias php81=/usr/bin/php8.1' >> ~/.bashrc
 RUN echo 'alias php8=/usr/bin/php8.0' >> ~/.bashrc
 RUN echo 'alias php7=/usr/bin/php7.4' >> ~/.bashrc
 RUN echo 'alias php7=/usr/bin/php7.3' >> ~/.bashrc
@@ -277,6 +328,7 @@ COPY config/default-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY config/pool_73.conf /etc/php/7.3/fpm/pool.d/pool_73.conf
 COPY config/pool_74.conf /etc/php/7.4/fpm/pool.d/pool_74.conf
 COPY config/pool_80.conf /etc/php/8.0/fpm/pool.d/pool_80.conf
+COPY config/pool_81.conf /etc/php/8.1/fpm/pool.d/pool_81.conf
 
 RUN mkdir -p /run/php
 

@@ -17,6 +17,9 @@
         <li>
             <a href="index.80.php">PHP 8.0</a>
         </li>
+        <li>
+            <a href="index.81.php">PHP 8.1</a>
+        </li>
     </ul>
 </body>
 </html>

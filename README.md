@@ -4,7 +4,7 @@ Repositório para gerenciamento de imagem Linux com todo o setup base, necessár
 
 ## Recursos
 
-* PHP 7.3/7.4/8.0
+* PHP 7.3/7.4 [<img src="https://www.php.net/images/logos/new-php-logo.svg" height="14"/>](https://www.php.net/images/logos/new-php-logo.svg) 8.0/8.1 [<img src="https://www.php.net/images/php8/logo_php8.svg" height="14"/>](https://www.php.net/images/php8/logo_php8.svg)
     - CLI
     - FPM
     - extensions
@@ -156,3 +156,6 @@ Repositório para gerenciamento de imagem Linux com todo o setup base, necessár
 
 * PHP 8.0-FPM
     - 8008
+
+* PHP 8.1-FPM
+    - 8100
