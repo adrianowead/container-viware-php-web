@@ -2,6 +2,10 @@
 
 Repositório para gerenciamento de imagem Linux com todo o setup base, necessário para todos os meus projetos web com PHP.
 
+## Docker HUB
+
+Imagem final: [Viware Base PHP](https://hub.docker.com/repository/registry-1.docker.io/adrianowead/viware-base-php/tags?page=1&ordering=last_updated)
+
 ## Recursos
 
 * PHP 7.3/7.4 [<img src="https://www.php.net/images/logos/new-php-logo.svg" height="14"/>](https://www.php.net/images/logos/new-php-logo.svg) 8.0/8.1 [<img src="https://www.php.net/images/php8/logo_php8.svg" height="14"/>](https://www.php.net/images/php8/logo_php8.svg)
